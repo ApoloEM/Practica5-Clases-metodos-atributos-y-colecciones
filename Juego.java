@@ -3,59 +3,57 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Juego {
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
 
-		System.out.print("Ingrese el número de jugadores: ");
-		int numJugadores = sc.nextInt();
-		sc.nextLine();
+    public static void main(String[] args) {
+        
+		//Configuración inicial
+        final int NUM_JUGADORES = 4;
+        final int CARTAS_POR_JUGADOR = 7;
 
-		System.out.print("Ingrese el número de cartas por jugador: ");
-		int cartasPorJugador = sc.nextInt();
-		sc.nextLine();
+        Scanner scanner = new Scanner(System.in);
+        List<Jugador> jugadores = new ArrayList<>();
 
-		// Validar que haya suficientes cartas para repartir
-		if (numJugadores * cartasPorJugador > 52) {
-			System.out.println("No hay suficientes cartas para repartir a todos los jugadores.");
-			sc.close();
-			return;
-		}
+        System.out.println("--- Ingresa los nombres de los jugadores ---");
+        for (int i = 0; i < NUM_JUGADORES; i++) {
+            System.out.print("Nombre del Jugador " + (i + 1) + ": ");
+            String nombre = scanner.nextLine();
+            jugadores.add(new Jugador(nombre));
+        }
+        scanner.close();
+        
+        Mazo mazo = new Mazo();
+        mazo.barajar();
 
-		List<Jugador> jugadores = new ArrayList<>();
-		for (int i = 1; i <= numJugadores; i++) {
-			System.out.print("Nombre del jugador " + i + ": ");
-			String nombre = sc.nextLine();
-			jugadores.add(new Jugador(nombre));
-		}
+		//Repartimos las cartas
+        List<List<Carta>> manos = mazo.repartir(NUM_JUGADORES, CARTAS_POR_JUGADOR);
+        for (int i = 0; i < jugadores.size(); i++) {
+            for (Carta carta : manos.get(i)) {
+                jugadores.get(i).asignarCarta(carta);
+            }
+        }
 
-		Mazo mazo = new Mazo();
-		mazo.barajar();
+		//Dibujamos
+        //DIBUJAR TODAS LAS FORMAS
+        for (int i = 0; i < jugadores.size(); i++) {
+            Visualizador.manoDeJugadorGrafica(jugadores.get(i), i);
+        }
+        if (mazo.cartasRestantes() > 0) {
+            Visualizador.mazoGrafico();
+        }
+        
+        //DIBUJAR TODO EL TEXTO ENCIMA
+        for (int i = 0; i < jugadores.size(); i++) {
+            Visualizador.manoDeJugadorTexto(jugadores.get(i), i);
+        }
+        for (int i = 0; i < jugadores.size(); i++) {
+            Visualizador.nombreJugador(jugadores.get(i), i);
+        }
+        if (mazo.cartasRestantes() > 0) {
+            Visualizador.mazoTexto();
+        }
 
-		// Repartir las cartas a los jugadores
-		List<List<Carta>> manos = mazo.repartir(jugadores.size(), cartasPorJugador);
-		for (int i = 0; i < jugadores.size(); i++) {
-			for (Carta carta : manos.get(i)) {
-				jugadores.get(i).asignarCarta(carta);
-			}
-		}
-
-		System.out.println("\n--- Estado de los jugadores ---");
-		for (Jugador jugador : jugadores) {
-			System.out.println(jugador.infoJugador());
-		}
-
-		System.out.println("Cartas restantes en el mazo: " + mazo.cartasRestantes());
-
-		// Regresar una carta al mazo (ejemplo: la primera carta del primer jugador)
-		if (!jugadores.get(0).getCartas().isEmpty()) {
-			Carta cartaDevuelta = jugadores.get(0).getCartas().get(0);
-			jugadores.get(0).deshacerseDeCarta(cartaDevuelta);
-			mazo.agregarCarta(cartaDevuelta);
-			System.out.println("\nSe regresó la carta " + cartaDevuelta + " al mazo.");
-		}
-
-		System.out.println("Cartas restantes en el mazo: " + mazo.cartasRestantes());
-
-		sc.close();
-	}
+        // Imprimimos en consola para verificar
+        System.out.println("Tablero de juego visualizado.");
+        System.out.println("Cartas restantes en el mazo: " + mazo.cartasRestantes());
+    }
 }

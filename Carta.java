@@ -3,7 +3,7 @@ public class Carta {
     private Figura figura;
 
     public enum Figura {
-        ESPADA, CORAZON, TREBOL, DIAMANTE
+        ESPADA, CORAZON, TREBOL, DIAMANTE;
     }
 
     public Carta(int valor, Figura figura) {
@@ -19,7 +19,10 @@ public class Carta {
         return figura;
     }
 
-    private String valorComoTexto() {
+    /**
+     * Obtiene la representación en texto del valor de la carta (A, 2-10, J, Q, K)
+     */
+    public String getValorTexto() {
         switch (valor) {
             case 1: return "A";
             case 11: return "J";
@@ -31,6 +34,6 @@ public class Carta {
 
     @Override
     public String toString() {
-        return "Carta: " + valorComoTexto() + " de " + figura;
+        return getValorTexto() + " " + figura.name();
     }
 }
