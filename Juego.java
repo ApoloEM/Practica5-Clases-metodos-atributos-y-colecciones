@@ -6,7 +6,6 @@ public class Juego {
 
     public static void main(String[] args) {
         
-		//Configuración inicial
         final int NUM_JUGADORES = 4;
         final int CARTAS_POR_JUGADOR = 7;
 
@@ -24,7 +23,6 @@ public class Juego {
         Mazo mazo = new Mazo();
         mazo.barajar();
 
-		//Repartimos las cartas
         List<List<Carta>> manos = mazo.repartir(NUM_JUGADORES, CARTAS_POR_JUGADOR);
         for (int i = 0; i < jugadores.size(); i++) {
             for (Carta carta : manos.get(i)) {
@@ -32,8 +30,6 @@ public class Juego {
             }
         }
 
-		//Dibujamos
-        //DIBUJAR TODAS LAS FORMAS
         for (int i = 0; i < jugadores.size(); i++) {
             Visualizador.manoDeJugadorGrafica(jugadores.get(i), i);
         }
@@ -41,7 +37,6 @@ public class Juego {
             Visualizador.mazoGrafico();
         }
         
-        //DIBUJAR TODO EL TEXTO ENCIMA
         for (int i = 0; i < jugadores.size(); i++) {
             Visualizador.manoDeJugadorTexto(jugadores.get(i), i);
         }
@@ -52,7 +47,6 @@ public class Juego {
             Visualizador.mazoTexto();
         }
 
-        // Imprimimos en consola para verificar
         System.out.println("Tablero de juego visualizado.");
         System.out.println("Cartas restantes en el mazo: " + mazo.cartasRestantes());
     }

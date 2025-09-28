@@ -19,10 +19,7 @@ public class Carta {
         return figura;
     }
 
-    /**
-     * Obtiene la representación en texto del valor de la carta (A, 2-10, J, Q, K)
-     */
-    public String getValorTexto() {
+    public String valorComoTexto() {
         switch (valor) {
             case 1: return "A";
             case 11: return "J";
@@ -34,6 +31,6 @@ public class Carta {
 
     @Override
     public String toString() {
-        return getValorTexto() + " " + figura.name();
+        return "Carta: " + valorComoTexto() + " de " + figura;
     }
 }

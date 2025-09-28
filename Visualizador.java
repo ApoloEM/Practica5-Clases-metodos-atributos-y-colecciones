@@ -31,7 +31,7 @@ public class Visualizador {
         }
 
         Canvas canvas = Canvas.getCanvas();
-        String valorTexto = c.getValorTexto();
+        String valorTexto = c.valorComoTexto();
         canvas.drawString(valorTexto, p.getX() + 5, p.getY() + 15, color, 14);
         canvas.drawString(simboloFigura, p.getX() + 18, p.getY() + 60, color, 36);
     }

@@ -10,7 +10,6 @@ public class Mazo {
         restablecer();
     }
 
-    // Este método pone todas las cartas en el mazo, como si lo armáramos desde cero
     public void restablecer() {
         cartas = new ArrayList<>();
         for (Carta.Figura figura : Carta.Figura.values()) {
@@ -27,7 +26,6 @@ public class Mazo {
 
     public List<List<Carta>> repartir(int numJugadores, int cartasPorJugador) {
         List<List<Carta>> manos = new ArrayList<>();
-        // Para cada jugador
         for (int i = 0; i < numJugadores; i++) {
             List<Carta> mano = new ArrayList<>();
             for (int j = 0; j < cartasPorJugador && !cartasNoRepartidas.isEmpty(); j++) {

@@ -107,6 +107,11 @@ public class Canvas
  
     /**
      * Dibuja un texto (String) en el canvas con un tamaño de fuente específico.
+     * @param text El texto a dibujar.
+     * @param x La coordenada x donde se dibujará el texto.
+     * @param y La coordenada y donde se dibujará el texto.
+     * @param color El color del texto.
+     * @param fontSize El tamaño de fuente del texto.
      */
     public void drawString(String text, int x, int y, String color, int fontSize) {
         // Guarda la fuente actual para no afectar otros dibujos
@@ -125,6 +130,12 @@ public class Canvas
 
     /**
      * Dibuja un texto (String) rotado en el canvas con un tamaño de fuente específico.
+     * @param text El texto a dibujar.
+     * @param x La coordenada x donde se dibujará el texto.
+     * @param y La coordenada y donde se dibujará el texto.
+     * @param angleDegrees El ángulo de rotación en grados.
+     * @param color El color del texto.
+     * @param fontSize El tamaño de fuente del texto.
      */
     public void drawRotatedString(String text, int x, int y, double angleDegrees, String color, int fontSize) {
         // Guarda la fuente actual
