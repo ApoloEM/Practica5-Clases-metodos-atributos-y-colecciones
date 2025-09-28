@@ -19,7 +19,7 @@ public class Carta {
         return figura;
     }
 
-    private String valorComoTexto() {
+    public String valorComoTexto() {
         switch (valor) {
             case 1: return "A";
             case 11: return "J";
